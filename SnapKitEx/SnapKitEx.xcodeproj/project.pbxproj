@@ -13,6 +13,7 @@
 		CCB833102A0B8A0A0028BD76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCB8330F2A0B8A0A0028BD76 /* Assets.xcassets */; };
 		CCB833132A0B8A0A0028BD76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCB833112A0B8A0A0028BD76 /* LaunchScreen.storyboard */; };
 		CCB8331C2A0B8BDD0028BD76 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CCB8331B2A0B8BDD0028BD76 /* SnapKit */; };
+		CCB833DF2A0CE4EB0028BD76 /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB833DE2A0CE4EB0028BD76 /* PracticeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		CCB8330F2A0B8A0A0028BD76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCB833122A0B8A0A0028BD76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCB833142A0B8A0A0028BD76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCB833DE2A0CE4EB0028BD76 /* PracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				CCB833062A0B8A090028BD76 /* AppDelegate.swift */,
 				CCB833082A0B8A090028BD76 /* SceneDelegate.swift */,
+				CCB833DE2A0CE4EB0028BD76 /* PracticeViewController.swift */,
 				CCB8330A2A0B8A090028BD76 /* ViewController.swift */,
 				CCB8330F2A0B8A0A0028BD76 /* Assets.xcassets */,
 				CCB833112A0B8A0A0028BD76 /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCB8330B2A0B8A090028BD76 /* ViewController.swift in Sources */,
+				CCB833DF2A0CE4EB0028BD76 /* PracticeViewController.swift in Sources */,
 				CCB833072A0B8A090028BD76 /* AppDelegate.swift in Sources */,
 				CCB833092A0B8A090028BD76 /* SceneDelegate.swift in Sources */,
 			);
