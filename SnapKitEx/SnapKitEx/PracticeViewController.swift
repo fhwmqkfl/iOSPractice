@@ -20,7 +20,7 @@ class PracticeViewController: UIViewController {
     
     let buttonStackView = UIStackView()
     let yellowStackView = UIStackView()
-    let verticalStackVIew = UIStackView()
+    let verticalStackView = UIStackView()
     let horizontalStackView = UIStackView()
     
     let firstBtn = UIButton()
@@ -29,7 +29,7 @@ class PracticeViewController: UIViewController {
     let fourthBtn = UIButton()
     
     let firstLabel = UILabel()
-    let secondLable = UILabel()
+    let secondLabel = UILabel()
     let thirdLabel = UILabel()
     let fourthLabel = UILabel()
     
@@ -48,6 +48,10 @@ class PracticeViewController: UIViewController {
         redView.backgroundColor = .red
         blueView.backgroundColor = .blue
         pinkView.backgroundColor = .systemPink
+        firstLabel.backgroundColor = .white
+        secondLabel.backgroundColor = .green
+        thirdLabel.backgroundColor = .yellow
+        fourthLabel.backgroundColor = .orange
         
         firstYellowView.backgroundColor = .yellow
         secondYellowView.backgroundColor = .yellow
@@ -60,12 +64,13 @@ class PracticeViewController: UIViewController {
         yellowStackView.distribution = .fillEqually
         yellowStackView.spacing = 10
         
-        verticalStackVIew.axis = .vertical
+        verticalStackView.axis = .vertical
+//        verticalStackView.distribution = .fillEqually
         
         horizontalStackView.spacing = 10
-//        horizontalStackView.distribution = .fill
+        horizontalStackView.backgroundColor = .black
+        horizontalStackView.distribution = .fillProportionally
         horizontalStackView.alignment = .top
-        
         
         firstBtn.setTitle("first", for: .normal)
         secondBtn.setTitle("second", for: .normal)
@@ -83,12 +88,12 @@ class PracticeViewController: UIViewController {
         fourthBtn.setTitleColor(.black, for: .normal)
         
         firstLabel.font = UIFont.boldSystemFont(ofSize: 13)
-        secondLable.font = UIFont.boldSystemFont(ofSize: 13)
+        secondLabel.font = UIFont.boldSystemFont(ofSize: 13)
         thirdLabel.font = UIFont.boldSystemFont(ofSize: 13)
         fourthLabel.font = UIFont.boldSystemFont(ofSize: 13)
         
         firstLabel.text = "이것은 Label 이것은 Label"
-        secondLable.text = "이것은 Label 이것은 Label"
+        secondLabel.text = "이것은 Label 이것은 Label"
         thirdLabel.text = "이것은 Label 이것은 Label"
         fourthLabel.text = "이것은 Label 이것은 Label"
         
@@ -113,15 +118,15 @@ class PracticeViewController: UIViewController {
         self.view.addSubview(secondGreenView)
         
         self.view.addSubview(horizontalStackView)
-        self.view.addSubview(verticalStackVIew)
+        self.view.addSubview(verticalStackView)
         
-        verticalStackVIew.addArrangedSubview(firstLabel)
-        verticalStackVIew.addArrangedSubview(secondLable)
-        verticalStackVIew.addArrangedSubview(thirdLabel)
-        verticalStackVIew.addArrangedSubview(fourthLabel)
+        verticalStackView.addArrangedSubview(firstLabel)
+        verticalStackView.addArrangedSubview(secondLabel)
+        verticalStackView.addArrangedSubview(thirdLabel)
+        verticalStackView.addArrangedSubview(fourthLabel)
         
         horizontalStackView.addArrangedSubview(pinkView)
-        horizontalStackView.addArrangedSubview(verticalStackVIew)
+        horizontalStackView.addArrangedSubview(verticalStackView)
         
     }
     
@@ -191,11 +196,12 @@ class PracticeViewController: UIViewController {
             $0.top.equalTo(blueView.snp.top).offset(10)
             $0.leading.equalTo(blueView.snp.leading).offset(10)
             $0.trailing.equalTo(blueView.snp.trailing).offset(-10)
-            $0.bottom.equalTo(blueView.snp.bottom).offset(-10)
+//            $0.bottom.equalTo(blueView.snp.bottom).offset(-10)
         }
         
         pinkView.snp.makeConstraints {
-            $0.height.equalTo(horizontalStackView.snp.height)
+            $0.width.equalTo(horizontalStackView.snp.width).multipliedBy(0.5)
+            $0.height.equalTo(blueView.snp.height).offset(-20)
         }
         
     }
