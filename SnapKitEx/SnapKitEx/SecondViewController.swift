@@ -80,6 +80,10 @@ class SecondViewController: UIViewController {
         buttonHStackView.distribution = .fillEqually
         labelVStackView.distribution = .fillProportionally
         
+        // blueInnerHStackView의 alignment수정
+        blueInnerHStackView.alignment = .top
+
+        
         firstButton.setTitleColor(.black, for: .normal)
         secondButton.setTitleColor(.black, for: .normal)
         thirdButton.setTitleColor(.black, for: .normal)
