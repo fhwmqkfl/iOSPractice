@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC73DC242A110EA500A7FA66 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC73DC232A110EA500A7FA66 /* SecondViewController.swift */; };
 		CCB833072A0B8A090028BD76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB833062A0B8A090028BD76 /* AppDelegate.swift */; };
 		CCB833092A0B8A090028BD76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB833082A0B8A090028BD76 /* SceneDelegate.swift */; };
 		CCB8330B2A0B8A090028BD76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB8330A2A0B8A090028BD76 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC73DC232A110EA500A7FA66 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		CCB833032A0B8A090028BD76 /* SnapKitEx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapKitEx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB833062A0B8A090028BD76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCB833082A0B8A090028BD76 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			children = (
 				CCB833062A0B8A090028BD76 /* AppDelegate.swift */,
 				CCB833082A0B8A090028BD76 /* SceneDelegate.swift */,
+				CC73DC232A110EA500A7FA66 /* SecondViewController.swift */,
 				CCB833DE2A0CE4EB0028BD76 /* PracticeViewController.swift */,
 				CCB8330A2A0B8A090028BD76 /* ViewController.swift */,
 				CCB8330F2A0B8A0A0028BD76 /* Assets.xcassets */,
@@ -148,6 +151,7 @@
 				CCB8330B2A0B8A090028BD76 /* ViewController.swift in Sources */,
 				CCB833DF2A0CE4EB0028BD76 /* PracticeViewController.swift in Sources */,
 				CCB833072A0B8A090028BD76 /* AppDelegate.swift in Sources */,
+				CC73DC242A110EA500A7FA66 /* SecondViewController.swift in Sources */,
 				CCB833092A0B8A090028BD76 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
