@@ -33,6 +33,24 @@ class ViewController: UIViewController {
             contactList.append(contact)
         }
     }
+    
+    func showDeleteAlert(_ tableView: UITableView, indexpath: IndexPath, title: String, content: String = "") {
+        let alert = UIAlertController(title: title, message: content, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            self.deleteData(tableView, indexpath: indexpath)
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(delete)
+            
+        self.present(alert, animated: true)
+    }
+    
+    func deleteData(_ tableView: UITableView, indexpath: IndexPath) {
+        contactList.remove(at: indexpath.row)
+        tableView.deleteRows(at: [indexpath], with: .fade)
+    }
 
     @IBAction func addButtonClicked(_ sender: UIButton) {
         // 값이 ContactModel에 추가되어야함
@@ -65,8 +83,21 @@ extension ViewController: UITableViewDataSource {
         let contact =  contactList[indexPath.row]
         cell.nameLabel.text = contact.name
         cell.phoneLabel.text = contact.phone
+        cell.selectionStyle = .none
         
         return cell
+    }
+    
+    // 화면 삭제 애니메이션 기능
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            contactList.remove(at: indexPath.row)
+            contactTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showDeleteAlert(tableView, indexpath: indexPath, title: "정말 삭제하시겠습니까?")
     }
 }
 
