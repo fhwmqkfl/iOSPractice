@@ -15,6 +15,8 @@
 		CC9958222A15EB3D0091C6FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC9958202A15EB3D0091C6FA /* LaunchScreen.storyboard */; };
 		CC99582A2A15ECE20091C6FA /* ContextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9958292A15ECE20091C6FA /* ContextTableViewCell.swift */; };
 		CC99582C2A15F16F0091C6FA /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99582B2A15F16F0091C6FA /* ContactModel.swift */; };
+		CCDEA5C12A1762DC00EDAA27 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEA5C02A1762DC00EDAA27 /* ModifyViewController.swift */; };
+		CCDEA5C42A18A9B000EDAA27 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CCDEA5C32A18A9B000EDAA27 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,7 @@
 		CC9958232A15EB3D0091C6FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC9958292A15ECE20091C6FA /* ContextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextTableViewCell.swift; sourceTree = "<group>"; };
 		CC99582B2A15F16F0091C6FA /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
+		CCDEA5C02A1762DC00EDAA27 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCDEA5C42A18A9B000EDAA27 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +69,7 @@
 				CC9958192A15EB3C0091C6FA /* ViewController.swift */,
 				CC99582B2A15F16F0091C6FA /* ContactModel.swift */,
 				CC99581B2A15EB3C0091C6FA /* Main.storyboard */,
+				CCDEA5C02A1762DC00EDAA27 /* ModifyViewController.swift */,
 				CC9958292A15ECE20091C6FA /* ContextTableViewCell.swift */,
 				CC99581E2A15EB3D0091C6FA /* Assets.xcassets */,
 				CC9958202A15EB3D0091C6FA /* LaunchScreen.storyboard */,
@@ -89,6 +94,9 @@
 			dependencies = (
 			);
 			name = TableViewEX;
+			packageProductDependencies = (
+				CCDEA5C32A18A9B000EDAA27 /* SnapKit */,
+			);
 			productName = TableViewEX;
 			productReference = CC9958122A15EB3C0091C6FA /* TableViewEX.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +125,9 @@
 				Base,
 			);
 			mainGroup = CC9958092A15EB3C0091C6FA;
+			packageReferences = (
+				CCDEA5C22A18A9B000EDAA27 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = CC9958132A15EB3C0091C6FA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -148,6 +159,7 @@
 				CC99582A2A15ECE20091C6FA /* ContextTableViewCell.swift in Sources */,
 				CC9958162A15EB3C0091C6FA /* AppDelegate.swift in Sources */,
 				CC9958182A15EB3C0091C6FA /* SceneDelegate.swift in Sources */,
+				CCDEA5C12A1762DC00EDAA27 /* ModifyViewController.swift in Sources */,
 				CC99582C2A15F16F0091C6FA /* ContactModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -370,6 +382,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CCDEA5C22A18A9B000EDAA27 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CCDEA5C32A18A9B000EDAA27 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CCDEA5C22A18A9B000EDAA27 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CC99580A2A15EB3C0091C6FA /* Project object */;
 }

@@ -14,6 +14,12 @@ class ViewController: UIViewController {
     let nameArray: [String] = ["coco", "keen", "kobon", "cherry", "a", "b", "c"]
     let phoneArray: [String] = ["010-1234-1234", "010-1234-1111", "010-1234-2222", "010-1234-3333", "010-1234-4444", "010-1234-5555", "010-1234-6666"]
     var contactList: [Contact] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        contactTableView.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +103,13 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showDeleteAlert(tableView, indexpath: indexPath, title: "정말 삭제하시겠습니까?")
+//        showDeleteAlert(tableView, indexpath: indexPath, title: "정말 삭제하시겠습니까?")
+        let nextVC = ModifyViewController()
+        let contact = contactList[indexPath.row]
+        nextVC.contact = contact
+        nextVC.subString = indexPath.row
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
