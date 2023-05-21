@@ -69,7 +69,7 @@ class ModifyViewController: UIViewController {
         contact?.name = nameTextField.text!
         contact?.phone = phoneTextField.text!
         
-        let mainVC = self.navigationController?.viewControllers[0] as! ViewController
+        let mainVC = self.navigationController?.viewControllers[0] as! MainViewController
         mainVC.contactList[subString!] = contact!
         
         self.navigationController?.popViewController(animated: true)

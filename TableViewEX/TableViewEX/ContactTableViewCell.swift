@@ -24,21 +24,18 @@ class ContactTableViewCell: UITableViewCell {
     }
     
     func setUI() {
-        nameLabel.backgroundColor = .systemPink
-        phoneLabel.backgroundColor = .systemBlue
-        
-        nameLabel.text = "namelabel"
-        phoneLabel.text = "phoneLabel"
-        
+        nameLabel.backgroundColor = .systemGray2
+        phoneLabel.backgroundColor = .lightGray
+
         VerticalStackView.axis = .vertical
         VerticalStackView.spacing = 10
-        VerticalStackView.alignment = .fill
-        VerticalStackView.distribution = .fillEqually
-        
+
         self.contentView.addSubview(VerticalStackView)
         
         VerticalStackView.addArrangedSubview(nameLabel)
         VerticalStackView.addArrangedSubview(phoneLabel)
+        
+        nameLabel.setContentHuggingPriority(.init(rawValue: 251), for: .vertical)
     }
     
     func setConstraints() {
