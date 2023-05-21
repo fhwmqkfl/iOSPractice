@@ -9,7 +9,10 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-    let testLabel = UILabel()
+    let textField = UITextField()
+    let addButton = UIButton()
+    let horizontalStackView = UIStackView()
+    
     let mainTableView = UITableView()
     let nameArray: [String] = ["coco", "keen", "kobon", "cherry", "a", "b", "c"]
     let phoneArray: [String] = ["010-1234-1234", "010-1234-1111", "010-1234-2222", "010-1234-3333", "010-1234-4444", "010-1234-5555", "010-1234-6666"]
@@ -36,24 +39,39 @@ class MainViewController: UIViewController {
     func setUI() {
         view.backgroundColor = .systemBackground
         
-        testLabel.backgroundColor = .systemGray
-        testLabel.text = "테스트용 레이블입니다"
+        textField.placeholder = "name / phonenumber"
+        textField.borderStyle = .roundedRect
+        textField.frame.size.height = 20
+        
+        addButton.setTitle("add", for: .normal)
+        addButton.setTitleColor(.systemBlue, for: .normal)
+        addButton.layer.borderColor = UIColor.systemGray2.cgColor
+        addButton.layer.borderWidth = 0.2
+        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.spacing = 10
+        horizontalStackView.distribution = .fillProportionally
         
         mainTableView.rowHeight = 100
         
     }
     func addSubviews() {
-        view.addSubview(testLabel)
+        view.addSubview(horizontalStackView)
         view.addSubview(mainTableView)
+        
+        horizontalStackView.addArrangedSubview(textField)
+        horizontalStackView.addArrangedSubview(addButton)
     }
     func setConstraints() {
-        testLabel.snp.makeConstraints {
+        horizontalStackView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(0)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
         }
         
         mainTableView.snp.makeConstraints {
-            $0.top.equalTo(testLabel.snp.bottom).offset(10)
+            $0.top.equalTo(horizontalStackView.snp.bottom).offset(10)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(0)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(0)
@@ -67,6 +85,25 @@ class MainViewController: UIViewController {
             
             contactList.append(contact)
         }
+    }
+    
+    @objc func addButtonTapped() {
+        // 1. 값을 찢어주자
+        let inputText = textField.text!
+        let inputArray = inputText.components(separatedBy: " / ")
+        
+        // 2개인지 체크 아니면
+        if inputArray.count == 2 {
+            let nemName = inputArray[0]
+            let newPhone = inputArray[1]
+            let contact = Contact(name: nemName, phone: newPhone)
+            contactList.append(contact)
+            mainTableView.reloadData()
+        } else {
+            print("nono")
+        }
+        
+        textField.text = ""
     }
 }
 
