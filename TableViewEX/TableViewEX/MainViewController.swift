@@ -20,9 +20,10 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         mainTableView.reloadData()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,10 +53,8 @@ class MainViewController: UIViewController {
         horizontalStackView.axis = .horizontal
         horizontalStackView.spacing = 10
         horizontalStackView.distribution = .fillProportionally
-        
-        mainTableView.rowHeight = 100
-        
     }
+    
     func addSubviews() {
         view.addSubview(horizontalStackView)
         view.addSubview(mainTableView)
@@ -63,26 +62,27 @@ class MainViewController: UIViewController {
         horizontalStackView.addArrangedSubview(textField)
         horizontalStackView.addArrangedSubview(addButton)
     }
+    
     func setConstraints() {
+        let safeArea = view.safeAreaLayoutGuide
+        
         horizontalStackView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            $0.top.leading.equalTo(safeArea).offset(10)
+            $0.trailing.equalTo(safeArea).offset(-10)
         }
         
         mainTableView.snp.makeConstraints {
             $0.top.equalTo(horizontalStackView.snp.bottom).offset(10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(0)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(0)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(0)
+            $0.leading.trailing.bottom.equalTo(safeArea)
         }
     }
+    
     func unitData() {
-        for i in 0..<nameArray.count {
-            let name = nameArray[i]
-            let phone = phoneArray[i]
-            let contact = Contact(name: name, phone: phone)
-            
+        let tupleArray = zip(nameArray, phoneArray)
+        
+        // todo -> map 사용
+        for data in tupleArray {
+            let contact = Contact(name: data.0 , phone: data.1)
             contactList.append(contact)
         }
     }
@@ -121,18 +121,15 @@ extension MainViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = ModifyViewController()
-        let contact = contactList[indexPath.row]
-        nextVC.contact = contact
-        nextVC.subString = indexPath.row
-        
-        self.navigationController?.pushViewController(nextVC, animated: true)
-    }
-    
 }
 
 extension MainViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let modifyVC = ModifyViewController()
+        let contact = contactList[indexPath.row]
+        modifyVC.contact = contact
+        modifyVC.index = indexPath.row
+        
+        self.navigationController?.pushViewController(modifyVC, animated: true)
+    }
 }

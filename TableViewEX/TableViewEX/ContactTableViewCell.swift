@@ -9,12 +9,13 @@ import UIKit
 import SnapKit
 
 class ContactTableViewCell: UITableViewCell {
-    lazy var nameLabel = UILabel()
-    lazy var phoneLabel = UILabel()
-    lazy var VerticalStackView = UIStackView()
+    let nameLabel = UILabel()
+    let phoneLabel = UILabel()
+    let verticalStackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        
         setUI()
         setConstraints()
     }
@@ -27,23 +28,21 @@ class ContactTableViewCell: UITableViewCell {
         nameLabel.backgroundColor = .systemGray2
         phoneLabel.backgroundColor = .lightGray
 
-        VerticalStackView.axis = .vertical
-        VerticalStackView.spacing = 10
+        verticalStackView.axis = .vertical
+        verticalStackView.spacing = 10
 
-        self.contentView.addSubview(VerticalStackView)
+        self.contentView.addSubview(verticalStackView)
         
-        VerticalStackView.addArrangedSubview(nameLabel)
-        VerticalStackView.addArrangedSubview(phoneLabel)
+        verticalStackView.addArrangedSubview(nameLabel)
+        verticalStackView.addArrangedSubview(phoneLabel)
         
         nameLabel.setContentHuggingPriority(.init(rawValue: 251), for: .vertical)
     }
     
     func setConstraints() {
-        VerticalStackView.snp.makeConstraints {
-            $0.top.equalTo(self.contentView.snp.top).offset(10)
-            $0.leading.equalTo(self.contentView.snp.leading).offset(10)
-            $0.trailing.equalTo(self.contentView.snp.trailing).offset(-10)
-            $0.bottom.equalTo(self.contentView.snp.bottom).offset(-10)
+        verticalStackView.snp.makeConstraints {
+            $0.top.leading.equalTo(self.contentView).offset(10)
+            $0.bottom.trailing.equalTo(self.contentView).offset(-10)
         }
     }
 }

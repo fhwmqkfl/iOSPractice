@@ -104,12 +104,12 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        showDeleteAlert(tableView, indexpath: indexPath, title: "정말 삭제하시겠습니까?")
-        let nextVC = ModifyViewController()
+        let modifyVC = ModifyViewController()
         let contact = contactList[indexPath.row]
-        nextVC.contact = contact
-        nextVC.subString = indexPath.row
+        modifyVC.contact = contact
+        modifyVC.index = indexPath.row
         
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        self.navigationController?.pushViewController(modifyVC, animated: true)
     }
 }
 

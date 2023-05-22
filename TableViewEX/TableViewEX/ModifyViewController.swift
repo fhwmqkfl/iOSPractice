@@ -9,12 +9,12 @@ import UIKit
 import SnapKit
 
 class ModifyViewController: UIViewController {
-    var nameTextField = UITextField()
-    var phoneTextField = UITextField()
+    let nameTextField = UITextField()
+    let phoneTextField = UITextField()
     let modifyButton = UIButton()
-    let verticalStackVIew = UIStackView()
+    let verticalStackView = UIStackView()
     
-    var subString: Int?
+    var index: Int?
     var contact: Contact?
     
     override func viewDidLoad() {
@@ -23,9 +23,6 @@ class ModifyViewController: UIViewController {
         setupUI()
         addSubviews()
         setConstraints()
-        
-        nameTextField.text = contact?.name
-        phoneTextField.text = contact?.phone
     }
     
     func setupUI() {
@@ -39,28 +36,31 @@ class ModifyViewController: UIViewController {
         modifyButton.setTitleColor(.systemBlue, for: .normal)
         modifyButton.addTarget(self, action: #selector(modifyButtonClicked), for: .touchUpInside)
         
-        verticalStackVIew.axis = .vertical
-        verticalStackVIew.spacing = 25
+        verticalStackView.axis = .vertical
+        verticalStackView.spacing = 25
+        
+        nameTextField.text = contact?.name
+        phoneTextField.text = contact?.phone
     }
     
     func addSubviews() {
-        verticalStackVIew.addArrangedSubview(nameTextField)
-        verticalStackVIew.addArrangedSubview(phoneTextField)
-        view.addSubview(verticalStackVIew)
+        verticalStackView.addArrangedSubview(nameTextField)
+        verticalStackView.addArrangedSubview(phoneTextField)
+        view.addSubview(verticalStackView)
         view.addSubview(modifyButton)
     }
     
     func setConstraints() {
         let safeArea = view.safeAreaLayoutGuide
 
-        verticalStackVIew.snp.makeConstraints {
+        verticalStackView.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(50)
             $0.leading.equalTo(safeArea).offset(25)
             $0.trailing.equalTo(safeArea).offset(-25)
         }
         
         modifyButton.snp.makeConstraints {
-            $0.top.equalTo(verticalStackVIew.snp.bottom).offset(25)
+            $0.top.equalTo(verticalStackView.snp.bottom).offset(25)
             $0.centerX.equalToSuperview()
         }
     }
@@ -69,9 +69,11 @@ class ModifyViewController: UIViewController {
         contact?.name = nameTextField.text!
         contact?.phone = phoneTextField.text!
         
-        let mainVC = self.navigationController?.viewControllers[0] as! MainViewController
-        mainVC.contactList[subString!] = contact!
+        guard let mainVC = self.navigationController?.viewControllers[0] as? MainViewController else { return }
         
-        self.navigationController?.popViewController(animated: true)
+        if let index = index, let contact = contact {
+            mainVC.contactList[index] = contact
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
