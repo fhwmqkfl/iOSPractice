@@ -48,15 +48,10 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footerUIView = UIView()
-//        footerUIView.backgroundColor = .systemGray6
-//        return footerUIView
-//    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return settingList[section].headerTitle
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
