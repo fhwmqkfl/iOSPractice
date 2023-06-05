@@ -10,7 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var mainTableView: UITableView!
     
-    var settingList: [(headerTitle: String, menu: [(title: String, image: UIImage?)])] = []
+    
+    var settingList: [Setting] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +24,60 @@ class ViewController: UIViewController {
     
     func setupSettingList() {
         settingList = [
-            (" ", [("에어플레인 모드", UIImage(systemName: "airplane")), ("Wi-Fi", UIImage(systemName: "wifi")), ("Bluetooth",UIImage(systemName: "bluetooth")), ("셀룰러", UIImage(systemName: "cellularbars")), ("개인용 핫스팟", UIImage(systemName: "personalhotspot"))]),
-            ("ALARM", [("알림", UIImage(systemName: "bell")), ("사운드 및 햅틱", UIImage(systemName: "bell")), ("집중 모드", UIImage(systemName: "bell")), ("스크린 타임", UIImage(systemName: "bell"))]),
-            ("GENERAL", [("일반", UIImage(systemName: "bell")), ("제어센터", UIImage(systemName: "bell")), ("디스플레이 및 밝기", UIImage(systemName: "bell")), ("홈 화면", UIImage(systemName: "bell")), ("손쉬운 사용", UIImage(systemName: "bell")), ("배경화면", UIImage(systemName: "bell")), ("Siri 및 검색", UIImage(systemName: "bell")), ("Face ID 및 암호", UIImage(systemName: "bell")), ("긴급 구조 요청" , UIImage(systemName: "bell")), ("노출 알림", UIImage(systemName: "bell")), ("배터리", UIImage(systemName: "bell")), ("개인정보 보호 및 보안", UIImage(systemName: "bell"))]),
-            ("APP & PAY", [("App Store", UIImage(systemName: "airplane")), ("지갑 및 Apple Pay", UIImage(systemName: "airplane"))]),
-            (" ", [("암호", UIImage(systemName: "personalhotspot")), ("연락처", UIImage(systemName: "personalhotspot")), ("캘린더", UIImage(systemName: "personalhotspot")), ("메모", UIImage(systemName: "personalhotspot")), ("미리 알림", UIImage(systemName: "personalhotspot")), ("전화", UIImage(systemName: "personalhotspot")), ("메세지", UIImage(systemName: "personalhotspot")), ("FaceTime", UIImage(systemName: "personalhotspot"))])
+            Setting(
+                headerTitle: " ",
+                menu: [
+                    Menu(settingtitle: "에어플레인 모드", settingImage: UIImage(systemName: "airplane")),
+                    Menu(settingtitle: "Wi-Fi", settingImage: UIImage(systemName: "wifi")),
+                    Menu(settingtitle: "Bluetooth", settingImage: UIImage(systemName: "bluetooth")),
+                    Menu(settingtitle: "셀룰러", settingImage: UIImage(systemName: "cellularbars")),
+                    Menu(settingtitle: "개인용 핫스팟", settingImage: UIImage(systemName: "personalhotspot"))
+                ]
+            ),
+            Setting(
+                headerTitle: "ALARM",
+                menu: [
+                    Menu(settingtitle: "알림", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "사운드 및 햅틱", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "집중 모드", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "스크린 타임", settingImage: UIImage(systemName: "bell"))
+                ]
+            ),
+            Setting(
+                headerTitle: "GENERAL",
+                menu: [
+                    Menu(settingtitle: "일반", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "제어센터", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "디스플레이 및 밝기", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "홈 화면", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "손쉬운 사용", settingImage: UIImage(systemName: "cellularbars")),
+                    Menu(settingtitle: "배경화면", settingImage: UIImage(systemName: "personalhotspot")),
+                    Menu(settingtitle: "Siri 및 검색", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "Face ID 및 암호", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "긴급 구조 요청", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "노출 알림", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "배터리", settingImage: UIImage(systemName: "bell")),
+                    Menu(settingtitle: "개인정보 보호 및 보안", settingImage: UIImage(systemName: "personalhotspot"))
+                ]
+            ),
+            Setting(
+                headerTitle: "APP & PAY",
+                menu: [
+                    Menu(settingtitle: "App Store", settingImage: UIImage(systemName: "airplane")),
+                    Menu(settingtitle: "지갑 및 Apple Pay", settingImage: UIImage(systemName: "airplane"))
+                ]
+            ),
+            Setting(
+                headerTitle: " ",
+                menu: [
+                    Menu(settingtitle: "암호", settingImage: UIImage(systemName: "personalhotspot")),
+                    Menu(settingtitle: "연락처", settingImage: UIImage(systemName: "airplane")),
+                    Menu(settingtitle: "캘린더", settingImage: UIImage(systemName: "personalhotspot")),
+                    Menu(settingtitle: "메모", settingImage: UIImage(systemName: "personalhotspot")),
+                    Menu(settingtitle: "미리 알림", settingImage: UIImage(systemName: "personalhotspot")),
+                    Menu(settingtitle: "전화", settingImage: UIImage(systemName: "personalhotspot"))
+                ]
+            )
         ]
     }
 }
@@ -48,8 +98,8 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell") as? SettingTableViewCell else { return UITableViewCell() }
         let data = settingList[indexPath.section].menu[indexPath.row]
-        cell.settingLabel.text = data.title
-        cell.settingImageView.image = data.image
+        cell.settingLabel.text = data.settingtitle
+        cell.settingImageView.image = data.settingImage
         return cell
     }
     
