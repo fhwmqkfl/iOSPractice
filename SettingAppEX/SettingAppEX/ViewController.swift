@@ -10,7 +10,6 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var mainTableView: UITableView!
     
-    
     var settingList: [Setting] = []
     
     override func viewDidLoad() {
