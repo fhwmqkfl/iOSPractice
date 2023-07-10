@@ -59,6 +59,17 @@ class ViewController: UIViewController {
         }
     }
     
+    func update(dict: [String:Any?]) {
+        let personList = realm.objects(Person.self)
+        let person = personList[0]
+        
+        try! realm.write{
+            for (key, value) in dict {
+                person.setValue(value, forKey: key)
+            }
+        }
+    }
+    
     @IBAction func buttonClicked(_ sender: UIButton) {
         let genderList: [Gender] = [.woman, .none]
         let personList = realm.objects(Person.self)
@@ -77,5 +88,10 @@ class ViewController: UIViewController {
         delete(person: person)
         numberingLabel.text = "\(UserDefaults.standard.integer(forKey: udid)) / count: \(personList.count)"
     }
+    
+    @IBAction func updateButtonClicked(_ sender: UIButton) {
+        update(dict: ["name": "hi", "age": 100])
+    }
+    
 }
 
