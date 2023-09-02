@@ -10,6 +10,7 @@ import UserNotifications
 
 extension UNUserNotificationCenter {
     func addNotificationRequest( ) {
+        print(#function)
         let content = UNMutableNotificationContent()
         content.title = "title"
         content.body = "테스트입니다"
@@ -20,14 +21,12 @@ extension UNUserNotificationCenter {
         var date = DateComponents()
         let formmater = DateFormatter()
         formmater.dateFormat = "K" // k는 hour를 24시간제로 보여줍니다.
-        date.hour = 17
+        date.hour = 23
         formmater.dateFormat = "mm"
-        date.minute = 46
+        date.minute = 39
+        formmater.dateFormat = "ss"
+        date.second = 45
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
-
-        // 트리거 만들기2 -> 이렇게도 된다.
-//        let component = Calendar.current.dateComponents([.hour, .minute], from: "Date객체")
-//        let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: "Bool 값에 따라 반복 설정")
 
         // 리퀘스트 생성
         let request = UNNotificationRequest(identifier: "test", content: content, trigger: trigger)
@@ -35,7 +34,5 @@ extension UNUserNotificationCenter {
         // 알림 센터에 등록
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
-}
 
-// 알림 해제
-//UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: "등록할 때의 고유값")
+}
