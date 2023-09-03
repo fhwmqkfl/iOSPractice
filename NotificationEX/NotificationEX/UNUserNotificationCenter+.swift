@@ -9,8 +9,11 @@ import Foundation
 import UserNotifications
 
 extension UNUserNotificationCenter {
-    func addNotificationRequest( ) {
-        print(#function)
+    func addNotificationRequest() {
+        if testArray.isEmpty {
+            return
+        }
+        
         let content = UNMutableNotificationContent()
         content.title = "title"
         content.body = "테스트입니다"
@@ -20,12 +23,10 @@ extension UNUserNotificationCenter {
         // 트리거 만들기1
         var date = DateComponents()
         let formmater = DateFormatter()
-        formmater.dateFormat = "K" // k는 hour를 24시간제로 보여줍니다.
+        formmater.dateFormat = "K"
         date.hour = 23
         formmater.dateFormat = "mm"
-        date.minute = 39
-        formmater.dateFormat = "ss"
-        date.second = 45
+        date.minute = 00
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
 
         // 리퀘스트 생성
