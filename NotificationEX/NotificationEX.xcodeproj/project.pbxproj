@@ -14,6 +14,7 @@
 		CC1C84042A9F328C007496A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC1C84032A9F328C007496A1 /* Assets.xcassets */; };
 		CC1C84072A9F328C007496A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC1C84052A9F328C007496A1 /* LaunchScreen.storyboard */; };
 		CC1C840F2A9F3688007496A1 /* UNUserNotificationCenter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C840E2A9F3688007496A1 /* UNUserNotificationCenter+.swift */; };
+		CC1C84112AADF24C007496A1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C84102AADF24C007496A1 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CC1C84062A9F328C007496A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC1C84082A9F328C007496A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC1C840E2A9F3688007496A1 /* UNUserNotificationCenter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+.swift"; sourceTree = "<group>"; };
+		CC1C84102AADF24C007496A1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				CC1C83FA2A9F328A007496A1 /* AppDelegate.swift */,
 				CC1C840E2A9F3688007496A1 /* UNUserNotificationCenter+.swift */,
 				CC1C83FC2A9F328A007496A1 /* SceneDelegate.swift */,
+				CC1C84102AADF24C007496A1 /* File.swift */,
 				CC1C83FE2A9F328A007496A1 /* ViewController.swift */,
 				CC1C84002A9F328A007496A1 /* Main.storyboard */,
 				CC1C84032A9F328C007496A1 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC1C84112AADF24C007496A1 /* File.swift in Sources */,
 				CC1C83FF2A9F328A007496A1 /* ViewController.swift in Sources */,
 				CC1C83FB2A9F328A007496A1 /* AppDelegate.swift in Sources */,
 				CC1C83FD2A9F328A007496A1 /* SceneDelegate.swift in Sources */,
