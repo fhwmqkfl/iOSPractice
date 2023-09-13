@@ -8,7 +8,6 @@
 import UIKit
 import UserNotifications
 
-// 2. 권한 설정
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -22,9 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 권한 요청 메서드(꼭 이곳이 아니여도 원할때 권한을 받을 수 있음)
         center.requestAuthorization(options: options) { success, error in
-            if let error = error {
-                print("에러 발생! : \(error.localizedDescription)")
-            }
+            if let error = error { print("에러 발생! : \(error.localizedDescription)") }
         }
         
         // Override point for customization after application launch.

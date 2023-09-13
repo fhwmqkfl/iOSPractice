@@ -24,8 +24,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.enterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        addNotification()
         mainLabel.text = "\(testArray.count)"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        enterForeground()
     }
     
     // TODO: 커밋후 화면 전환시 확인위해 추가해놓음
@@ -45,31 +51,23 @@ class ViewController: UIViewController {
     func openSettingPage() {
         let alertController = UIAlertController (title: "Title", message: "알람수신을 확인해야 알람을 받을수 있어요", preferredStyle: .alert)
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    print("Settings opened: \(success)") // Prints true
-                })
-            }
+            if UIApplication.shared.canOpenURL(settingsUrl) { UIApplication.shared.open(settingsUrl) }
+            
+            self.TestSwitch.isOn = false
         }
         
-        alertController.addAction(settingsAction)
         let cancelAction = UIAlertAction(title: "okay", style: .default) { _ in
             self.TestSwitch.isOn = false
         }
+        
+        alertController.addAction(settingsAction)
         alertController.addAction(cancelAction)
-
         present(alertController, animated: true, completion: nil)
     }
-    
-    /// Check to notification array
-    func printPendingNotification() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-            print("현재 알람 등록되있는 갯수")
-            print(requests.count)
-        }
+        
+    func addNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(enterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     @objc func enterForeground() {
@@ -103,6 +101,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addLabel(_ sender: UIButton) {
+        testArray.append("\(testArray.count)")
         DispatchQueue.main.async {
             self.mainLabel.text = "\(testArray.count)"
             UNUserNotificationCenter.current().addNotificationRequest()
