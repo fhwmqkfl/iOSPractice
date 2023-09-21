@@ -34,5 +34,8 @@ class ClockViewController: UIViewController {
         clockViewModel.didChangeTime = { [weak self] clockViewModel in
             self?.closureTimeLabel.text = clockViewModel.closureTime
         }
+        clockViewModel.observableTIme.bind { [weak self] time in
+            self?.ObservablesTimeLabel.text = time
+        }
     }
 }
