@@ -8,12 +8,7 @@
 import UIKit
 import UserNotifications
 
-enum alarmStatus: Int {
-    case Off // 0
-    case On // 1
-}
-
-var testArray: [String] = []
+var testArray: [String] = ["0"]
 
 class ViewController: UIViewController {
     @IBOutlet weak var TestSwitch: UISwitch!
@@ -34,18 +29,8 @@ class ViewController: UIViewController {
         enterForeground()
     }
     
-    // TODO: 커밋후 화면 전환시 확인위해 추가해놓음
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print(#function)
-    }
-    
-    func notificationStatus(completion: @escaping (Bool) -> Void) {
-        let center = UNUserNotificationCenter.current()
-        center.getNotificationSettings { (settings) in
-            let authorized = settings.authorizationStatus == .authorized
-            completion(authorized)
-        }
     }
     
     func openSettingPage() {
@@ -90,10 +75,9 @@ class ViewController: UIViewController {
             return
         }
         
-        let result = sender.isOn ? 1 : 0
         UserDefaults.standard.set(TestSwitch.isOn, forKey: "switchState")
 
-        if result == alarmStatus.On.rawValue {
+        if sender.isOn {
             UNUserNotificationCenter.current().addNotificationRequest()
         } else {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["test"])
