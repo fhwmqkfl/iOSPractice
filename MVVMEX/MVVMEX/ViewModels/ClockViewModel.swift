@@ -21,6 +21,9 @@ class ClockViewModel {
     // 2.observable
     var observableTIme: Observable<String> = Observable("Obserable")
     
+    // 3. Combine
+    @Published var combineTime: String = "Combine"
+    
     // 초기화 시점에서 현재 시간을 넣어줌
     init() {
         closureTime = Clock.currentTime() // 1.closure
@@ -31,5 +34,6 @@ class ClockViewModel {
     func checkTime() {
         closureTime = Clock.currentTime()
         observableTIme.value = Clock.currentTime()
+        combineTime = Clock.currentTime()
     }
 }
