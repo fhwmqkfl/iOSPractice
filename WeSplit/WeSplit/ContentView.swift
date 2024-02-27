@@ -8,23 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tabCount = 0
-
+    @State private var isActivated: Bool = false
+    
     var body: some View {
-//        Button("Tab Count : \(tabCount)") {
-//            tabCount += 1
-//        }
-        HStack{
-            VStackView()
-            VStackView()
-            VStackView()
-        }
-        .padding(10)
-        .background(.yellow)
+        NavigationStack {
+            VStack {
+                HStack{
+                    VStackView()
+                    VStackView()
+                    VStackView()
+                }
+                    .padding(isActivated ? 50 : 10)
+                    .background(isActivated ? .yellow : .black)
+                    .onTapGesture {
+                        // add animation
+                        withAnimation {
+                            self.isActivated.toggle()
+                        }
+                } // HStack
 
+                NavigationLink(destination: MyTextView()) {
+                    Text("네비게이션")
+                        .fontWeight(.bold)
+                        .font(.system(size: 30))
+                        .padding()
+                        .background(.orange)
+                        .foregroundStyle(.white)
+                        .cornerRadius(30)
+                } .padding(50)
+            }
+        } // NavigationStack
     }
-
-
 }
 
 struct VStackView: View {
