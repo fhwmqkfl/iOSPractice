@@ -8,36 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isActivated: Bool = false
-    
+    // 텍스트(name)이 변경되면 동시에 textfield에도 표시가 되어야함
+    // 2way binding -> $
+    let students = ["coco", "harry", "rob"]
+    @State private var selectedStudent = "coco"
+
     var body: some View {
         NavigationStack {
-            VStack {
-                HStack{
-                    VStackView()
-                    VStackView()
-                    VStackView()
+            Form {
+                Picker("select your student", selection: $selectedStudent) {
+                    ForEach(students, id: \.self) {
+                        Text($0)
+                    }
                 }
-                    .padding(isActivated ? 50 : 10)
-                    .background(isActivated ? .yellow : .black)
-                    .onTapGesture {
-                        // add animation
-                        withAnimation {
-                            self.isActivated.toggle()
-                        }
-                } // HStack
-
-                NavigationLink(destination: MyTextView()) {
-                    Text("네비게이션")
-                        .fontWeight(.bold)
-                        .font(.system(size: 30))
-                        .padding()
-                        .background(.orange)
-                        .foregroundStyle(.white)
-                        .cornerRadius(30)
-                } .padding(50)
             }
-        } // NavigationStack
+            .navigationTitle("Select a student")
+        }
     }
 }
 
