@@ -8,39 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    // 텍스트(name)이 변경되면 동시에 textfield에도 표시가 되어야함
-    // 2way binding -> $
-    let students = ["coco", "harry", "rob"]
-    @State private var selectedStudent = "coco"
+    @State private var checkAmount = 0.0
+    @State private var numberOfPeople = 2
+    @State private var tipPercentage = 20
 
+    let tipPercentages = [10, 15, 20, 25, 0]
     var body: some View {
         NavigationStack {
+            // 식사에 얼마를 내야하는 계산하는 폼
             Form {
-                Picker("select your student", selection: $selectedStudent) {
-                    ForEach(students, id: \.self) {
-                        Text($0)
+                // 가격입력 폼 & 키보드는 숫자만
+                // 사람이 몇명인지 선택하는화면
+                Section {
+                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD")).keyboardType(.decimalPad)
+
+                    Picker("number of people", selection: $numberOfPeople) {
+                        ForEach(2..<100) {
+                            Text("\($0) people")
+                        }
                     }
                 }
-            }
-            .navigationTitle("Select a student")
-        }
-    }
-}
 
-struct VStackView: View {
-    var body: some View {
-        VStack{
-            Text("1!")
-                .fontWeight(.bold)
-                .font(.system(size: 60))
-            Text("2!")
-                .font(.system(size: 60))
-                .fontWeight(.bold)
-            Text("3!")
-                .font(.system(size: 60))
-                .fontWeight(.bold)
+                // 화면 보여주는 폼
+                Section {
+                    Text(checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                }
+            }
+            .navigationTitle("weSplit")
         }
-        .background(.orange)
     }
 }
 
