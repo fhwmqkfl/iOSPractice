@@ -14,6 +14,13 @@ struct ContentView: View {
     @FocusState private var amountIsFocused: Bool
 
     let tipPercentages = [10, 15, 20, 25, 0]
+    
+    var totalPrice: Double {
+        let tipSection = 1 + Double(tipPercentage) / 100
+        let total = checkAmount * tipSection
+
+        return total
+    }
 
     var totalPerson: Double {
         // calculate the total per person here
@@ -47,16 +54,21 @@ struct ContentView: View {
 
                 Section("How much do you want to tip?") {
                     Picker("tip percentage", selection: $tipPercentage) {
-                        ForEach(tipPercentages, id: \.self) {
+                        ForEach(0..<101, id: \.self) {
                             Text($0, format: .percent)
                         }
                     }
-                    .pickerStyle(.segmented)
+                    .pickerStyle(.navigationLink)
+                }
+                
+                // 원래 총 금액
+                Section("Total Amount") {
+                    Text(totalPrice, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
 
                 // 화면 보여주는 폼
-                Section {
-                    Text(checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                Section("Amount per person") {
+                    Text(totalPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
             .navigationTitle("weSplit")
