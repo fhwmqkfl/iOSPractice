@@ -12,6 +12,7 @@ struct FirstChallenge: View {
     @State private var inputData: Double = 0
     @State private var unit: String = "meters"
     @State private var resultUnit: String = "kilometers"
+    @FocusState private var inputIsFocused: Bool
 
     let unitSet = ["meters","kilometers","feet","miles"]
     
@@ -45,12 +46,14 @@ struct FirstChallenge: View {
 
         return amount.value
     }
-    
+
     var body: some View {
         NavigationStack {
             Form {
                 Section("Input Number") {
-                    TextField("input", value: $inputData, format: .number )
+                    TextField("input", value: $inputData, format: .number)
+                        .keyboardType(.decimalPad)
+                        .focused($inputIsFocused)
 
                     Picker("Unit", selection: $unit) {
                         ForEach(unitSet, id: \.self) {
@@ -75,6 +78,13 @@ struct FirstChallenge: View {
 
             }
             .navigationTitle("Length Conversion")
+            .toolbar {
+                if inputIsFocused {
+                    Button("Done") {
+                        inputIsFocused = false
+                    }
+                }
+            }
         }
     }
 }
