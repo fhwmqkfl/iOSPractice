@@ -10,41 +10,17 @@ import SwiftUI
 // Length unit conversions app
 struct FirstChallenge: View {
     @State private var inputData: Double = 0
-    @State private var unit: String = "meters"
-    @State private var resultUnit: String = "kilometers"
+    @State private var inputUnit = UnitLength.meters
+    @State private var resultUnit = UnitLength.kilometers
     @FocusState private var inputIsFocused: Bool
 
-    let unitSet = ["meters","kilometers","feet","miles"]
-    
-    var targetAmount: Measurement<UnitLength> {
-        var amount: Measurement<UnitLength>
-        if unit == "meters" {
-            amount = Measurement(value: inputData, unit: UnitLength.meters)
-        } else if unit == "kilometers" {
-            amount = Measurement(value: inputData, unit: UnitLength.kilometers)
-        } else if unit == "feet" {
-            amount = Measurement(value: inputData, unit: UnitLength.feet)
-        } else {
-            amount = Measurement(value: inputData, unit: UnitLength.miles)
-        }
+    let unitSet: [UnitLength] = [.feet, .miles, .kilometers, .meters]
+    let formatter: MeasurementFormatter
 
-        return amount.converted(to: .meters)
-    }
-    
-    var resultAmount: Double {
-        var amount: Measurement<UnitLength>
-        let targetAmount = targetAmount
-        if resultUnit == "meters" {
-            amount = targetAmount
-        } else if resultUnit == "kilometers" {
-            amount = targetAmount.converted(to: .kilometers)
-        } else if resultUnit == "feet" {
-            amount = targetAmount.converted(to: .feet)
-        } else {
-            amount = targetAmount.converted(to: .miles)
-        }
-
-        return amount.value
+    var result: String {
+        let inputMeasurement = Measurement(value: inputData, unit: inputUnit)
+        let outputMeasurement = inputMeasurement.converted(to: resultUnit)
+        return formatter.string(from: outputMeasurement)
     }
 
     var body: some View {
@@ -55,21 +31,20 @@ struct FirstChallenge: View {
                         .keyboardType(.decimalPad)
                         .focused($inputIsFocused)
 
-                    Picker("Unit", selection: $unit) {
+                    Picker("Unit", selection: $inputUnit) {
                         ForEach(unitSet, id: \.self) {
-                            Text("\($0)")
+                            Text(formatter.string(from: $0).capitalized)
                         }
                     }
                     .pickerStyle(.segmented)
-
                 }
 
                 Section("Output Number") {
-                    Text(resultAmount, format: .number)
+                    Text(result)
 
                     Picker("ResultUnit", selection: $resultUnit) {
                         ForEach(unitSet, id: \.self) {
-                            Text("\($0)")
+                            Text(formatter.string(from: $0).capitalized)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -86,6 +61,13 @@ struct FirstChallenge: View {
                 }
             }
         }
+    }
+
+    init() {
+        formatter = MeasurementFormatter()
+        formatter.unitOptions = .providedUnit
+        formatter.unitStyle = .long
+
     }
 }
 
