@@ -8,20 +8,53 @@
 import SwiftUI
 
 struct GuessTheFlag: View {
-    @State private var showingAlert = false
+    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
+    @State private var correctAnswer = Int.random(in: 0...2)
+
+    @State private var showingScore = false
+    @State private var scoreTitle = ""
 
     var body: some View {
-        Button("show alert") {
-            showingAlert = true
-        }
-        .alert("import message", isPresented: $showingAlert) {
-            Button("delete", role: .destructive) { }
-            Button("Cancel", role: .cancel) { }
-        } message: {
-            Text("Please read this")
+        ZStack {
+            Color.blue.ignoresSafeArea()
+
+            VStack(spacing: 30) {
+                VStack {
+                    Text("Tap the flag of")
+                    Text(countries[correctAnswer])
+                }
+
+                ForEach(0..<3) {number in
+                    Button {
+                        flagTapped(number)
+                    } label: {
+                        Image(countries[number])
+                    }
+                }
+            }
+            .alert(scoreTitle, isPresented: $showingScore) {
+                Button("Continue", action: askQuestion)
+               } message: {
+                   Text("your score is ???")
+               }
         }
 
-        Text("showingAlert: \(String(showingAlert))")
+    }
+
+    func flagTapped(_ number: Int) {
+        if number == correctAnswer {
+            scoreTitle = "Correct"
+        } else {
+            scoreTitle = "Wrong"
+        }
+
+        showingScore = true
+    }
+
+
+    func askQuestion() {
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
     }
 }
 
