@@ -16,27 +16,58 @@ struct GuessTheFlag: View {
 
     var body: some View {
         ZStack {
-            Color.blue.ignoresSafeArea()
+            RadialGradient(stops: [
+                .init(color: Color(red: 0.1, green: 0.2, blue: 0.45), location: 0.3),
+                .init(color: Color(red: 0.76, green: 0.15, blue: 0.26), location: 0.3),
+            ],center: .top, startRadius: 200, endRadius: 700)
+            .ignoresSafeArea()
+//            LinearGradient(colors: [.blue, .black], startPoint: .top, endPoint: .bottom)
+            VStack {
+                Spacer()
 
-            VStack(spacing: 30) {
-                VStack {
-                    Text("Tap the flag of")
-                    Text(countries[correctAnswer])
-                }
+                Text("Guses the flag")
+                    .font(.largeTitle.weight(.bold))
+                    .foregroundStyle(.white)
 
-                ForEach(0..<3) {number in
-                    Button {
-                        flagTapped(number)
-                    } label: {
-                        Image(countries[number])
+                VStack(spacing: 15) {
+                    VStack {
+                        Text("Tap the flag of")
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline.weight(.heavy))
+
+                        Text(countries[correctAnswer])
+                            .foregroundStyle(.secondary)
+                            .font(.largeTitle.weight(.semibold))
+                    }
+
+                    ForEach(0..<3) {number in
+                        Button {
+                            flagTapped(number)
+                        } label: {
+                            Image(countries[number])
+                                .clipShape(.capsule)
+                                .shadow(radius:5)
+                        }
                     }
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+                .background(.regularMaterial)
+                .clipShape(.rect(cornerRadius: 20))
+                .alert(scoreTitle, isPresented: $showingScore) {
+                    Button("Continue", action: askQuestion)
+                } message: {
+                    Text("your score is ???")
+                }
+
+                Spacer()
+                Spacer()
+
+                Text("Score : ??")
+                    .foregroundStyle(.white)
+                    .font(.title.bold())
+                Spacer()
             }
-            .alert(scoreTitle, isPresented: $showingScore) {
-                Button("Continue", action: askQuestion)
-               } message: {
-                   Text("your score is ???")
-               }
         }
 
     }
