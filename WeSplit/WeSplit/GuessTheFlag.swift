@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct GuessTheFlag: View {
-    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
+    static let allCountries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"]
+    @State private var countries = allCountries.shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
-
     @State private var showingScore = false
+    @State private var showingResult = false
     @State private var scoreTitle = ""
+    @State private var score = 0
+    @State private var questionCounter = 1
 
     var body: some View {
         ZStack {
@@ -57,13 +60,19 @@ struct GuessTheFlag: View {
                 .alert(scoreTitle, isPresented: $showingScore) {
                     Button("Continue", action: askQuestion)
                 } message: {
-                    Text("your score is ???")
+                    Text("your score is \(score)")
+                }
+                .alert("Game Over!", isPresented: $showingResult) {
+                    Button("Start Again", action: newGame)
+                } message: {
+                    Text("your final score is \(score)")
                 }
 
+
                 Spacer()
                 Spacer()
 
-                Text("Score : ??")
+                Text("Score : \(score)")
                     .foregroundStyle(.white)
                     .font(.title.bold())
                 Spacer()
@@ -75,17 +84,43 @@ struct GuessTheFlag: View {
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             scoreTitle = "Correct"
+            score += 1
         } else {
-            scoreTitle = "Wrong"
+            let needThe = ["UK", "US"]
+            let theAnswer = countries[number]
+
+            if needThe.contains(theAnswer) {
+                scoreTitle = "Wrong! That's the flag of the \(theAnswer)"
+            } else {
+                scoreTitle = "Wrong! That's the flag of \(theAnswer)"
+            }
+
+
+            if score > 0 {
+                score -= 1
+            }
         }
 
-        showingScore = true
+        if questionCounter == 8 {
+            showingResult = true
+        } else {
+            showingScore = true
+        }
     }
 
 
     func askQuestion() {
+        countries.remove(at: correctAnswer)
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        questionCounter += 1
+    }
+
+    func newGame() {
+        questionCounter = 0
+        score = 0
+        countries = Self.allCountries
+        askQuestion()
     }
 }
 
